@@ -11,16 +11,30 @@
 	<body style="padding: 20px">
 		
 		<!-- 註冊頁面表單 -->
-		<form method="post" action="/JavaWeb/register" class="pure-form">
+		<form method="post" action="/JavaWeb/register" class="pure-form" onsubmit="return check()">
 			<fieldset>
 				<legend>註冊頁面</legend>
 				🤵 <input type="text" id="username" name="username" placeholder="請輸入帳號" required /><p />
 				🔑 <input type="password" id="password" name="password" placeholder="請輸入密碼" required /><p />
 				🔑 <input type="password" id="confirmPassword" placeholder="請再輸入一次密碼" required /><p />
 				<p />
-				<button type="submit" class="pure-button pure-button-primary">傳送</button>
+				<button type="submit" class="pure-button pure-button-primary">註冊</button>
 			</fieldset>
 		</form>
 			
 	</body>
+	<script>
+		function check(){
+			const password = document.getElementById('password').value;
+			const confirmPassword = document.getElementById('confirmPassword').value;
+			console.log(password);
+			console.log(confirmPassword);
+			if(password !== confirmPassword{
+				alert('二次密碼必須相同');
+				return false;
+			}
+			
+			return true;
+		}
+	</script>
 </html>
