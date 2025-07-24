@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -38,7 +39,9 @@ public class LoginServlet extends HttpServlet {
 		// 驗證帳號(是否有此帳號)
 		User user = userService.getUserByUsername(username);
 		if(user == null) {
-			resp.getWriter().print("查無此帳號");
+			// resp.getWriter().print("查無此帳號");
+			req.setAttribute("message", "查無此帳號");
+			req.getRequestDispatcher("/WEB-INF/view/result.jsp").forward(req, resp);
 			return;
 		}
 		
@@ -59,10 +62,11 @@ public class LoginServlet extends HttpServlet {
 		}		
 		
 		session.setAttribute("username", username); // 登入成功之後才有的 username
-		
-		resp.getWriter().print("Hi " + username + " 您好!");
-		resp.getWriter().print("<p />");
-		
+		// 取得使用這列表資料給 user.jsp 顯示使用
+		List<User> users = userService.findAllUsers();
+		req.setAttribute("users", users);
+		// 重導到使用者頁面
+		req.getRequestDispatcher("/WEB-INF/view/user.jsp").forward(req, resp);
 		
 	}
 	
